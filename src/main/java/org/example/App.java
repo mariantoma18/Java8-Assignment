@@ -13,6 +13,7 @@ public class App {
     Path output = Paths.get("output.txt");
 
     List<String> peopleWithTheSameMonthOfBirth = manager.collectPeopleWithSameMonthOfBirth(input);
+
     manager.writeToFile(output, peopleWithTheSameMonthOfBirth);
   }
 }

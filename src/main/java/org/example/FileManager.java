@@ -12,6 +12,12 @@ public class FileManager {
   Verifier verifier = new Verifier();
   UserInput user = new UserInput();
 
+  /*
+  This method reads the file content, processes it line by line,
+  splits the content into parts using the "," separator,
+  filters the people if all the data exists and if the birth month is correct,
+  sorts the filtered people by name, and returns them in a list.
+   */
   public List<String> collectPeopleWithSameMonthOfBirth(Path input) {
     List<String> peopleWithTheSameMonthOfBirth;
     try (Stream<String> lines = Files.lines(input)) {
@@ -33,9 +39,13 @@ public class FileManager {
     return peopleWithTheSameMonthOfBirth;
   }
 
+  /*
+  Method used to write the list of people to a file.
+   */
   public void writeToFile(Path output, List<String> peopleWithTheSameMonthOfBirth) {
     try {
       Files.write(output, peopleWithTheSameMonthOfBirth);
+      System.out.println("\nThe list has been successfully written to the specified file.");
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
