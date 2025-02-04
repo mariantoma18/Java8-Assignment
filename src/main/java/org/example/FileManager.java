@@ -3,6 +3,7 @@ package org.example;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -12,6 +13,12 @@ public class FileManager {
   Verifier verifier = new Verifier();
   UserInput user = new UserInput();
 
+  public FileManager(UserInput user) {
+    this.user = user;
+  }
+
+  public FileManager() {}
+
   /*
   This method reads the file content, processes it line by line,
   splits the content into parts using the "," separator,
@@ -19,7 +26,8 @@ public class FileManager {
   sorts the filtered people by name, and returns them in a list.
    */
   public List<String> collectPeopleWithSameMonthOfBirth(Path input) {
-    List<String> peopleWithTheSameMonthOfBirth;
+    List<String> peopleWithTheSameMonthOfBirth = new ArrayList<>();
+
     try (Stream<String> lines = Files.lines(input)) {
 
       int targetMonth = user.getMonthFromUser();
@@ -34,7 +42,7 @@ public class FileManager {
               .collect(Collectors.toList());
 
     } catch (IOException e) {
-      throw new RuntimeException(e);
+      System.out.println("Error: " + e.getMessage());
     }
     return peopleWithTheSameMonthOfBirth;
   }
